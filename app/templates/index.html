@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Frase Motivacionais</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Gerador de Frases</h1>
+  <button onclick="carregarFrase()">Nova Frase</button>
+
+  <p id="fraseTexto"></p>
+  <p id="fraseAutor"></p>
+
+  <script>
+    async function carregarFrase() {
+      const resposta = await fetch('/frase');
+      const dados = await resposta.json();
+      document.getElementById('fraseTexto').textContent = `"${dados.frase}"`;
+      document.getElementById('fraseAutor').textContent = `— ${dados.autor}`;
+    }
+  </script>
+</body>
+</html>
